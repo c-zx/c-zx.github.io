@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <title>c-zx's blog - 递归</title>
+        <link rel="stylesheet" href="https://c-zx.github.io/theme/css/main.css" />
+        <link href="https://c-zx.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="c-zx's blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://c-zx.github.io/">c-zx's blog</a></h1>
+                <nav><ul>
+                    <li><a href="https://c-zx.github.io/category/misc.html">misc</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="https://c-zx.github.io/about-recursion.html">递归那些事儿</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2021-07-01T18:00:00+08:00">
+                Published: Thu 01 July 2021
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://c-zx.github.io/author/cao-zhenxiang.html">Cao ZhenXiang</a>
+        </address>
+<p>In <a href="https://c-zx.github.io/category/misc.html">misc</a>.</p>
+<p>tags: <a href="https://c-zx.github.io/tag/di-gui.html">递归</a> <a href="https://c-zx.github.io/tag/bian-cheng.html">编程</a> </p>
+</footer><!-- /.post-info --><h2>什么是递归？</h2>
+<p>如果你在词典里查询<code>recursion</code>（递归），会看到以下解释：</p>
+<blockquote>
+<p>Recursion (-sh?n), n. [L. recursio. See Recur.] The act of <strong>recurring</strong>; return. [Obs.] Boyle.</p>
+</blockquote>
+<p>假如你并不知道<code>recurring</code>是什么意思，于是继续在词典里查询<code>recur</code>：</p>
+<blockquote>
+<p>Recur (r?k?r), v. i. [imp. &amp; p. p. Recurred (-k?rd); p. pr. &amp; vb. n. Recurring.] [L. recurrere; pref. re- re- + currere to run. See Current.]</p>
+<ol>
+<li><strong>To come back; to return again or repeatedly; to come again to mind.</strong></li>
+</ol>
+<p>When any word has been used to signify an idea, the old idea will recur in the mind when the word is heard. I. Watts.</p>
+<ol>
+<li>
+<p>To occur at a stated interval, or according to some regular rule; as, the fever will recur to-night.</p>
+</li>
+<li>
+<p>To resort; to have recourse; to go for help.</p>
+</li>
+</ol>
+<p>If, to avoid succession in eternal existence, they recur to the “punctum stans” of the schools, they will thereby very little help us to a more positive idea of infinite duration. Locke.</p>
+<p>Recurring decimal (Math.), a circulating decimal. See under Decimal. -- Recurring series (Math.), an algebraic series in which the coefficients of the several terms can be expressed by means of certain preceding coefficients and constants in one uniform manner.</p>
+</blockquote>
+<p>所以，<code>recursion</code>的意思就是<code>The act of coming back</code>。</p>
+<p>而在词典里查询<code>recursion</code>这个词的过程本身，其实就是一个非常简单的递归。</p>
+<p>PS: 其实日常的学习也是一个类似递归的过程。比如说，为了搭建博客，需要了解博客框架的使用。而使用博客框架又需要学习Markdown的基本语法。写完博客如果要优化搜索引擎排名，还需要学习一些SEO技巧。如果想要定制博客的页面，就需要学习CSS的基本用法等等。学习完这一切后，还不能忘了最初搭建博客是为了写些什么。</p>
+<h2>递归的优点</h2>
+<p>使用递归进行编程，通常代码逻辑本身会比较简单，比如上述过程可以这样用Python表示：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">get_definition</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">understand</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>递归的缺点</h2>
+<p>使用递归时，<strong>内存</strong>消耗往往会比较大。比如在上述查询单词含义的过程，如果含义本身里有你不明白的单词（<code>recur</code>），你不仅要查询这个单词（<code>recur</code>）本身的含义，还不能忘记原本要查的单词的意思（<code>The act of recurring</code>）。上述例子只是一个非常简单的例子，所以可能需要“记忆”的内容显得不是很多。但假如你刚刚入门一种语言，查询一个词，而含义里却有更多不认识的词，然后依次查询又分别遇到更多更多不认识的词。这样查询起来想必会很累。</p>
+<p>PS: 所以如果你刚刚开始学习一门语言，你的词典的释义最好是用你的母语写的！</p>
+<h2>递归会遇到的问题</h2>
+<p>使用递归时，最常见的问题应该就是<strong>无限递归</strong>了。回到我们刚刚查询<code>recur</code>含义的过程，它的第三种含义是</p>
+<blockquote>
+<p>To resort; to have <strong>recourse</strong>; to go for help</p>
+</blockquote>
+<p>假如你不知道<code>recourse</code>的含义，再去词典里查询，会发现<code>recourse</code>的第一种含义就是<code>To return; to recur</code>！这下好了，为了理解<code>recur</code>，你需要明白<code>recourse</code>；可是为了明白<code>recourse</code>，你又需要理解<code>recur</code>，这根本是个死循环吗！</p>
+<p>如果你写的代码陷入了无限递归，多半就会报错显示<code>Stack overflow</code>！其中<code>Stack</code>是用于存储局部变量的数据结构，而由于计算机陷入了无限递归，在不能忘记原本词的含义的同时，还要记住无限多的<code>recur</code>和<code>recourse</code>的含义，最终内存用尽<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>，就只好报错了。</p>
+<h2>针对递归的优化</h2>
+<p>一些编程语言实现（比如Scheme）会使用一种叫做<strong>尾递归优化</strong>(Tail Recursion Optimization)的技术。如果递归在函数的<strong>最后一步</strong>产生，那么这个递归就是尾递归。</p>
+<p>Tail Recursion Optimization 有时也叫 Tail Recursion Elimination。也就是<strong>尾递归消除</strong>。因为尾递归优化的原理就是将尾递归转换为迭代，这样计算机就不用记住前一次递归中各个变量的值，也可以减少函数调用的性能损失。</p>
+<p>不过有时候，并不是很容易写出能进行<code>尾递归优化</code>的代码，与其用递归，不如直接用迭代(Iterate)。</p>
+<p>就阶乘函数举个例子。</p>
+<p>以下是阶乘函数的直接递归实现:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">fact</span><span class="p">(</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">num</span>
+</code></pre></div>
+
+<p>PS: 虽然递归在函数的最后一行产生，但是注意函数返回的是<code>fact(num-1) * num</code>，
+因此最后一步并不是对<code>fact</code>的函数调用，而是计算（<code>fact</code>的返回值与<code>num</code>）的乘积。</p>
+<p>为了返回正确的值，必须要知道<code>fact</code>的返回值和<code>num</code>的内容，因此<code>num</code>并不能被优化掉。</p>
+<p>如果用迭代可以这样：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span>
+</code></pre></div>
+
+<p>而支持尾递归优化的实现是这样的<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fact_tc</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">fact</span><span class="p">(</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">fact</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</code></pre></div>
+
+<p>可以看出，直接递归和迭代的实现都很直接；相比来说，支持尾递归优化的实现就比较麻烦。</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>一般来说，并非内存用尽才会报错<code>Stack overflow</code>。很多编程语言会设置一个<code>stack limit</code>来避免无限递归耗尽内存，所以一般编程语言抛出<code>Stack overflow</code>的时候，往往只是<code>stack</code>的大小超过了原本设置的限制。&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>为了代码可读性，这里用的是Python。不过CPython（官方实现）是不支持尾递归优化的。因为<a href="https://en.wikipedia.org/wiki/Guido_van_Rossum">Guido</a>认为尾递归优化会破坏Traceback，影响Debugging.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="https://c-zx.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/c-zx">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
