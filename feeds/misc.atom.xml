@@ -26,7 +26,7 @@
 &lt;p&gt;而在词典里查询&lt;code&gt;recursion&lt;/code&gt;这个词的过程本身，其实就是一个非常简单的递归。&lt;/p&gt;
 &lt;p&gt;PS: 其实日常的学习也是一个类似递归的过程。比如说，为了搭建博客，需要了解博客框架的使用。而使用博客框架又需要学习Markdown的基本语法。写完博客如果要优化搜索引擎排名，还需要学习一些SEO技巧。如果想要定制博客的页面，就需要学习CSS的基本用法等等。学习完这一切后，还不能忘了最初搭建博客是为了写些什么。&lt;/p&gt;
 &lt;h2&gt;递归的优点&lt;/h2&gt;
-&lt;p&gt;使用递归进行编程，通常代码逻辑本身会比较简单，比如上述过程可以这样用Python表示：&lt;/p&gt;
+&lt;p&gt;使用递归进行编程，通常代码逻辑本身会比较&lt;strong&gt;简单&lt;/strong&gt;，比如上述过程可以这样用Python表示：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_definition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -49,7 +49,7 @@
 &lt;p&gt;一些编程语言实现（比如Scheme）会使用一种叫做&lt;strong&gt;尾递归优化&lt;/strong&gt;(Tail Recursion Optimization)的技术。如果递归在函数的&lt;strong&gt;最后一步&lt;/strong&gt;产生，那么这个递归就是尾递归。&lt;/p&gt;
 &lt;p&gt;Tail Recursion Optimization 有时也叫 Tail Recursion Elimination。也就是&lt;strong&gt;尾递归消除&lt;/strong&gt;。因为尾递归优化的原理就是将尾递归转换为迭代，这样计算机就不用记住前一次递归中各个变量的值，也可以减少函数调用的性能损失。&lt;/p&gt;
 &lt;p&gt;不过有时候，并不是很容易写出能进行&lt;code&gt;尾递归优化&lt;/code&gt;的代码，与其用递归，不如直接用迭代(Iterate)。&lt;/p&gt;
-&lt;p&gt;就阶乘函数举个例子。&lt;/p&gt;
+&lt;p&gt;就阶乘函数举个例子，&lt;/p&gt;
 &lt;p&gt;以下是阶乘函数的直接递归实现:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fact&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -85,7 +85,7 @@
 &lt;p&gt;一般来说，并非内存用尽才会报错&lt;code&gt;Stack overflow&lt;/code&gt;。很多编程语言会设置一个&lt;code&gt;stack limit&lt;/code&gt;来避免无限递归耗尽内存，所以一般编程语言抛出&lt;code&gt;Stack overflow&lt;/code&gt;的时候，往往只是&lt;code&gt;stack&lt;/code&gt;的大小超过了原本设置的限制。&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:2"&gt;
-&lt;p&gt;为了代码可读性，这里用的是Python。不过CPython（官方实现）是不支持尾递归优化的。因为&lt;a href="https://en.wikipedia.org/wiki/Guido_van_Rossum"&gt;Guido&lt;/a&gt;认为尾递归优化会破坏Traceback，影响Debugging.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;为了代码可读性，这里用的是Python。不过CPython（官方实现）是不支持尾递归优化的。因为&lt;a href="https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html"&gt;Guido&lt;/a&gt;认为尾递归优化会破坏Traceback，影响Debugging.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</content><category term="misc"></category><category term="递归"></category><category term="编程"></category></entry></feed>

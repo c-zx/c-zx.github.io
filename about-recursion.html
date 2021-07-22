@@ -62,7 +62,7 @@
 <p>而在词典里查询<code>recursion</code>这个词的过程本身，其实就是一个非常简单的递归。</p>
 <p>PS: 其实日常的学习也是一个类似递归的过程。比如说，为了搭建博客，需要了解博客框架的使用。而使用博客框架又需要学习Markdown的基本语法。写完博客如果要优化搜索引擎排名，还需要学习一些SEO技巧。如果想要定制博客的页面，就需要学习CSS的基本用法等等。学习完这一切后，还不能忘了最初搭建博客是为了写些什么。</p>
 <h2>递归的优点</h2>
-<p>使用递归进行编程，通常代码逻辑本身会比较简单，比如上述过程可以这样用Python表示：</p>
+<p>使用递归进行编程，通常代码逻辑本身会比较<strong>简单</strong>，比如上述过程可以这样用Python表示：</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
     <span class="n">words</span> <span class="o">=</span> <span class="n">get_definition</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
@@ -85,7 +85,7 @@
 <p>一些编程语言实现（比如Scheme）会使用一种叫做<strong>尾递归优化</strong>(Tail Recursion Optimization)的技术。如果递归在函数的<strong>最后一步</strong>产生，那么这个递归就是尾递归。</p>
 <p>Tail Recursion Optimization 有时也叫 Tail Recursion Elimination。也就是<strong>尾递归消除</strong>。因为尾递归优化的原理就是将尾递归转换为迭代，这样计算机就不用记住前一次递归中各个变量的值，也可以减少函数调用的性能损失。</p>
 <p>不过有时候，并不是很容易写出能进行<code>尾递归优化</code>的代码，与其用递归，不如直接用迭代(Iterate)。</p>
-<p>就阶乘函数举个例子。</p>
+<p>就阶乘函数举个例子，</p>
 <p>以下是阶乘函数的直接递归实现:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -121,7 +121,7 @@
 <p>一般来说，并非内存用尽才会报错<code>Stack overflow</code>。很多编程语言会设置一个<code>stack limit</code>来避免无限递归耗尽内存，所以一般编程语言抛出<code>Stack overflow</code>的时候，往往只是<code>stack</code>的大小超过了原本设置的限制。&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p>为了代码可读性，这里用的是Python。不过CPython（官方实现）是不支持尾递归优化的。因为<a href="https://en.wikipedia.org/wiki/Guido_van_Rossum">Guido</a>认为尾递归优化会破坏Traceback，影响Debugging.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>为了代码可读性，这里用的是Python。不过CPython（官方实现）是不支持尾递归优化的。因为<a href="https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html">Guido</a>认为尾递归优化会破坏Traceback，影响Debugging.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
